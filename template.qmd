@@ -1,7 +1,8 @@
 ---
-english: true  # activate english words
-lang: en       # english version
+#english: true  # activate english words
+#lang: en       # english version
 sender:
+  firstline: "Georg Mustermann"
   firstname: Georg
   lastname: Mustermann
   street: Reinarzstr. 49
