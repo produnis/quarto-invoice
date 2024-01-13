@@ -22,3 +22,7 @@ lang: en
 
 ### Invoice
 The table of items is created inside an R chunk. You need to change the tibble to fit your needs.
+
+## Screenshots
+
+![](https://i.imgur.com/Rf8jtF1.jpg)
