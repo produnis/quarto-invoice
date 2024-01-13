@@ -1,0 +1,16 @@
+\closing{$closing$,
+}
+
+$if(attachment)$
+$if(english)$
+Enclosure(s):
+$else$
+Anlage(n):
+$endif$
+\begin{itemize}
+$for(attachment)$\item $attachment$ %
+$endfor$
+\end{itemize}
+$endif$
+
+\end{letter}

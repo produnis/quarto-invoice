@@ -1,0 +1,103 @@
+\newcommand{\myFirstname}{$sender.firstname$}
+\newcommand{\myFamilyname}{$sender.lastname$}
+\newcommand{\myStreet}{$sender.street$}
+\newcommand{\myTown}{$sender.plz$ $sender.city$}
+
+\setkomavar{date}{$date$}
+\setkomavar{fromname}{\flushright\normalfont\textbf{\myFirstname\ \myFamilyname}}
+\setkomavar{signature}{\myFirstname\ \myFamilyname}
+\setkomavar{fromaddress}{\flushright\normalfont\scriptsize%
+$sender.graduate$ \myFirstname\ \myFamilyname\\[2mm]
+\myStreet\\\myTown\\%
+$if(sender.country)$
+$sender.country$\\[2mm]%
+$endif$
+$if(english)$
+Phone: $sender.telefon$\\%
+$else$
+Telefon: $sender.telefon$\\%
+$endif$
+$if(sender.fax)$
+Fax:  $sender.fax$ \\[2mm]%
+$else$[2mm]
+$endif$
+Mail: $sender.email$\\%
+$if(sender.www)$%
+Web: $sender.www$\\[2mm]
+$else$[2mm]
+$endif$%\\[2mm]
+$sender.bank$\\
+IBAN:\quad\ $sender.iban$\\
+$if(sender.taxnr)$
+$if(english)$
+Tax Nr:\quad\ $sender.taxnr$\\
+$else$
+Steuernr.:\quad\ $sender.taxnr$\\
+$endif$
+$endif$
+$if(sender.invoicenr)$
+$if(english)$
+Invoice Nr:\quad\ $sender.invoicenr$\\
+$else$
+Rechnungsnr.:\quad\ $sender.invoicenr$\\
+$endif$
+$endif$
+
+$if(english)$
+\ \\Date:\quad $date$}
+$else$
+\ \\Datum:\quad $date$}
+$endif$
+\setkomavar{backaddress}{\myFamilyname\ | \myStreet\ | \myTown}
+\setkomavar{signature}{%
+$if(signature)$
+\includegraphics[width=4cm]{$signature$}\\%
+$endif$
+\myFirstname\ \myFamilyname}
+\renewcommand*\familydefault{\sfdefault}
+\setkomavar{firsthead}{}
+\setkomavar{location}{%
+  \raggedleft
+  \usekomavar{fromname}\\
+  \usekomavar{fromaddress}
+}
+
+% --------------kopf/fusszeile----------------
+\clearmainofpairofpagestyles
+$if(english)$
+\cfoot{\flushright\scriptsize\normalfont \thepage\ / \pageref{LastPage} }
+$else$
+\cfoot{\flushright\scriptsize\normalfont Seite \thepage\ von \pageref{LastPage} }
+$endif$
+\RedeclarePageStyleAlias{empty}{scrheadings}
+%----------------------------------------------
+\KOMAoptions{footsepline=false}
+\KOMAoptions{footheight=1.0\baselineskip}
+
+\setkomavar{date}{}
+\setkomavar{subject}{$subject$}
+
+\setlength{\parindent}{0pt}
+
+\makeatletter
+  \@setplength{backaddrheight}{0pt}% because backaddress=off
+  \@setplength{toaddrhpos}{2.5cm}%distance from left
+  \@setplength{toaddrvpos}{5cm}%distance from top
+  \@setplength{toaddrheight}{3.5cm}%height of the addressbox
+  \@setplength{toaddrwidth}{10cm}% width of the addressbox
+  \@addtoplength{locwidth}{45mm} % width of ABSENDERbox
+  \@setplength{lochpos}{20mm}%distance from right
+  \@setplength{locvpos}{$topdistance$}%distance from top
+  \@setplength{refvpos}{110mm}
+\makeatother
+
+\begin{letter}{$recipient.name$\\
+$recipient.host$\\
+$recipient.street$\\
+$recipient.plz$ $recipient.city$\\
+$recipient.country$
+}
+%
+\opening{$opening$,}
+%
+%\setstretch{$spacing$}
