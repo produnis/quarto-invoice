@@ -21,11 +21,11 @@ contributes:
       papersize: a4
       fontsize: 11pt
       geometry: 
-        - top=20mm
+        - top=30mm
         - bottom=30mm
         - left=25mm
         - right=20mm 
-        #- headsep=20mm
+        - headsep=15mm
       topdistance: 40mm  # Abstand des Absenders vom Seitenkopf
       df-print: kable
       code-line-numbers: true # false

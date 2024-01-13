@@ -20,6 +20,17 @@ lang: en
 ---
 ```
 
+## Logo
+
+You can add a logo banner to the top of the pages. Set the path to your logo in YAML:
+
+```
+---
+logo: /path/to/logobanner.png
+logowidth: 12cm
+---
+```
+
 ### Invoice
 The table of items is created inside an R chunk. You need to change the tibble to fit your needs.
 

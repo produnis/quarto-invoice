@@ -64,6 +64,9 @@ $endif$
 
 % --------------kopf/fusszeile----------------
 \clearmainofpairofpagestyles
+$if(logo)$
+\chead{\vspace{-16mm}\includegraphics[width=$logowidth$]{$logo$} }
+$endif$
 $if(english)$
 \cfoot{\flushright\scriptsize\normalfont \thepage\ / \pageref{LastPage} }
 $else$
