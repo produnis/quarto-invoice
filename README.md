@@ -1,10 +1,10 @@
 # quarto-invoice
 
-This is [quarto](https://quarto.org) extension to create an invoice. The output format is PDF.
+This is a [quarto](https://quarto.org) extension to create an invoice. The output format is PDF.
 
 ## Installation
 
-`quarto use template produnis/quarto-letter`
+`quarto use template produnis/quarto-invoice`
 
 
 ## Usage
