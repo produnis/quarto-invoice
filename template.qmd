@@ -3,13 +3,13 @@
 #lang: en       # english version
 sender:
   firstline: "Georg Mustermann"
+  graduate: Prof. Dr.
   firstname: Georg
   lastname: Mustermann
   street: Reinarzstr. 49
   plz: 47805
   city: Krefeld
   country: Deutschland
-  graduate: Prof. Dr.
   telefon: "+49 555 822 5555"
   fax: "+49 555 444 12345"
   email: "mustermann@mail.org"
@@ -18,13 +18,12 @@ sender:
   iban: DE12 3456 7890
   taxnr: 555/444/217
   invoicenr: 22-A7-01
-recipient:
-  name: Erna Empfängerin
-  host: Gesundheitsamt FB13
-  street: Unter der Brücke 17
-  plz: 12345
-  city: Empfangsstadt
-  country: Germany
+address:
+  - Erna Empfängerin
+  - Gesundheitsamt FB13
+  - Unter der Brücke 17
+  - 12345 Empfangsstadt
+  - Germany
 # ------------------------------------------------  
 date: 2022-12-24
 #signature: my-signature.png # bring your own file 
@@ -44,6 +43,7 @@ format:
 für erbrachte Leistungen erlaube ich mir in Rechnung zu stellen:
 
 ```{r}
+# this is german. see next chunk for english table
 library(kableExtra)
 library(tibble)
 library(dplyr)
@@ -75,20 +75,16 @@ taxgesamt <- round(taxpreis + zwischen, 2)
 # combining...
 df <- bind_rows(df, tribble(
         ~Posten, ~Preis, ~Anzahl, ~Gesamt,
-        "Zwischensumme", zwischen, 1, zwischen, 
+        "Nettobetrag", zwischen, 1, zwischen, 
         taxname, taxpreis, 1, taxpreis,
         "GESAMT:", taxgesamt, 1, taxgesamt))
 # print it out
 df |>
-  kable(align=c("l","r","c", "r"),
-        table.envir="center") |> 
-  row_spec(0, 
-           background = "#185191",       
-           color="white", 
-           bold=TRUE) |>  
-  row_spec(c((nrow(df)-3),(nrow(df)-2),(nrow(df)-1)),                   
-           extra_latex_after = "\\hline") |>
-  row_spec(nrow(df), bold=TRUE )          #|>
+  kable(align=c("l","r","c", "r"), table.envir="center") |> 
+  row_spec(0, background = "#185191", color="white", bold=TRUE) |>  
+  row_spec((nrow(df)-2), italic=TRUE) |>  
+  row_spec(c((nrow(df)-3),(nrow(df)-2),(nrow(df)-1)), extra_latex_after = "\\hline") |>
+  row_spec(nrow(df), background = "#07A1E2", color="white", bold=TRUE ) #|>
   #kable_styling(latex_options="scale_down")# use me if table is really long 
 ```
 
@@ -97,3 +93,51 @@ df |>
 Bitte übeweisen Sie den Betrag von **`r taxgesamt` €** innerhalb von 14 Tage unter Angabe der Rechnungsnummer auf mein oben angegebenes Konto.
 
 \lipsum[5]
+
+
+```{r}
+library(kableExtra)
+library(tibble)
+library(dplyr)
+########################################
+# change to fit your needs
+#----------------------------------------
+## So, what items are in your invoice?
+df <- tribble(
+  ~Item, ~Price, ~Count,
+  "Cleaning your Repositories", 17, 5,
+  "Install Linux on your Laptops", 49.99, 2,
+  "USB CHarger", 9.50, 1
+)
+
+## need to add taxes?
+tax <- 0.19 # in Decimalpercent
+taxname <- "Nonsense Tax 19%"
+
+#----------------------------------------
+# no need to change after here....
+########################################
+
+#----------------------------------------
+df$Total <- df$Price * df$Count
+zwischen <- round(sum(df$Total), 2)
+# add taxes
+taxpreis <- round(zwischen * tax, 2)
+taxgesamt <- round(taxpreis + zwischen, 2)
+# combining...
+df <- bind_rows(df, tribble(
+        ~Item, ~Price, ~Count, ~Total,
+        "Net Value", zwischen, 1, zwischen, 
+        taxname, taxpreis, 1, taxpreis,
+        "TOTAL:", taxgesamt, 1, taxgesamt))
+# print it out
+df |>
+  kable(align=c("l","r","c", "r"), table.envir="center") |> 
+  row_spec(0, background = "#185191", color="white", bold=TRUE) |>  
+  row_spec((nrow(df)-2), italic=TRUE) |>  
+  row_spec(c((nrow(df)-3),(nrow(df)-2),(nrow(df)-1)), extra_latex_after = "\\hline") |>
+  row_spec(nrow(df), background = "#07A1E2", color="white", bold=TRUE ) #|>
+  #kable_styling(latex_options="scale_down")# use me if table is really long 
+```
+
+Please pay  **`r taxgesamt` $** till tomorrow. 

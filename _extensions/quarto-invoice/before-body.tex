@@ -94,13 +94,7 @@ $endif$
   \@setplength{refvpos}{110mm}
 \makeatother
 
-\begin{letter}{$recipient.name$\\
-$recipient.host$\\
-$recipient.street$\\
-$recipient.plz$ $recipient.city$\\
-$recipient.country$
-}
+\begin{letter}{$for(address)$$address$$sep$\\$endfor$}
 %
 \opening{$opening$,}
 %
-%\setstretch{$spacing$}
